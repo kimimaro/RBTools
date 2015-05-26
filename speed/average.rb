@@ -1,60 +1,81 @@
 #!/usr/bin/env ruby
 # encoding utf-8
 
-require 'logger'
-require "erb"
-include ERB::Util
+require_relative 'common'
+require_relative 'fileParser'
 
-LOGGER = Logger.new(STDOUT)
-
-LOGGER.level = Logger::WARN
-# LOGGER.level = Logger::DEBUG
+# include ERB::Util
 
 class SpeedManager
 
-  attr_accessor :source
+  attr_accessor :file_log_list, :source
 
-  def initialize(source, opt = {})
+  def initialize()
     super
 
-    # @source = ARGV[0]
-    @source = source
-    
-    # all log list
-    @file_log_list = Array.new(10)
-
-    LOGGER.debug "speed man initialize #{source}"
+    LOGGER.debug "speed man initialize."
   end
 
   def average
 
-    i = 0
-    10.times do
-      file_path = @source + i.to_str
+    # get log files
+    source = ARGV[0]
+    LOGGER.debug "source file argv:#{source}"
 
-      LOGGER.debug "file path:#{file_path}"
-
-      File.open(file_path, "r") do |file|
-        file.each_line do |line|
-          # Launch speed point:%d with value:%f ms
-          point_pattern = '^Launch speed point:(\d) with value.*$'
-          value_pattern = '^Launch speed point:\d with value:(.*) ms$'
-
-          point = line.grep(point_pattern)
-          value = line.grep(value_pattern)
-
-          LOGGER.debug "point:#{point} value:#{value}"
-
-          @file_log_list.add({point.to_sym => value})
-        end
-      end
-
-      i=i+1
+    if source == nil
+      source = './logs/log'
     end
 
-    LOGGER.debug "file log list:#{@file_log_list}"
+    @source = source
+
+    file_parser = FileParser.new(source)
+    @file_log_list = file_parser.parser
+
+    LOGGER.debug "parse log list:#{@file_log_list}"
+
+    # compose log hash
+    average_log_hash = Hash.new()
+
+    @file_log_list.each() do |file_log|
+      file_log.each() do |key,value|
+        value_list = average_log_hash[key]
+        if value_list == nil then
+          value_list = Array.new()
+        end
+
+        LOGGER.debug "key:#{key}, value:#{value}, value_list:#{value_list}"
+        value_list.push(value.to_i)
+        average_log_hash[key] = value_list
+      end
+    end
+
+    LOGGER.debug "average_log_hash:#{average_log_hash}"
+
+    # calculate average
+    average_log_hash.each() do |key,value_list|
+      average = value_list.inject{ |sum, el| sum + el }.to_f / value_list.size
+
+      LOGGER.debug "value_list size:#{value_list.size}, average:#{average} for key:#{key}"
+      average_log_hash[key] = average
+    end
+
+    LOGGER.debug "final average speed:#{average_log_hash}"
+
+    return average_log_hash
+  end
+
+  def average_write_to_file
+    log_hash = average()
+
+    file_path = @source
+    File.open(file_path, "w") do |file|
+      log_hash.each() do |k,v|
+        file << "Launch speed point:#{k} with average value:#{v} ms\n"
+      end
+    end
   end
 end
 
-speed_man = SpeedManager.new()  # 参数值和init方法参数数量？
-#speed_man.average
+speed_man = SpeedManager.new()
+speed_man.average_write_to_file
+
