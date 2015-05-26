@@ -67,7 +67,7 @@ class SpeedManager
   def average_write_to_file
     log_hash = average()
 
-    file_path = @source
+    file_path = @source + '.log'
     File.open(file_path, "w") do |file|
       log_hash.each() do |k,v|
         file << "Launch speed point:#{k} with average value:#{v} ms\n"
