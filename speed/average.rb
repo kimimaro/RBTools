@@ -59,18 +59,20 @@ class SpeedManager
       average_log_hash[key] = average
     end
 
-    LOGGER.debug "final average speed:#{average_log_hash}"
-
     return average_log_hash
   end
 
   def average_write_to_file
     log_hash = average()
 
+    log_hash = log_hash.sort_by{|k,v| k.to_s.to_i}
+
+    LOGGER.debug "final average speed:#{log_hash}"
+
     file_path = @source + '.log'
     File.open(file_path, "w") do |file|
       log_hash.each() do |k,v|
-        file << "Launch speed point:#{k} with average value:#{v} ms\n"
+        file << "速度统计点:#{"%02d" % (k.to_s.to_i)}, 启动到该点耗时均值:#{"%04d" % v} ms, 含义:#{SPEED_POINT_MEANING_HASH[k.to_sym]} \n"
       end
     end
   end
