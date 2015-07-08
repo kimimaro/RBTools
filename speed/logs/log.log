@@ -1,0 +1,30 @@
+速度统计点:01, 启动到该点耗时均值:0000 ms, 含义:Main函数开始时刻 
+速度统计点:02, 启动到该点耗时均值:0338 ms, 含义:application_didFinishLaunchingWithOptions开始时刻 
+速度统计点:03, 启动到该点耗时均值:0400 ms, 含义:用户行为统计模块初始化开始时刻 
+速度统计点:04, 启动到该点耗时均值:0406 ms, 含义:doTasksBeforeUI开始时刻 
+速度统计点:05, 启动到该点耗时均值:0416 ms, 含义:registerKSCrashHandler开始时刻 
+速度统计点:06, 启动到该点耗时均值:0416 ms, 含义:setWebViewUserAgent开始时刻 
+速度统计点:07, 启动到该点耗时均值:0419 ms, 含义:registerAsGlobalInstance开始时刻 
+速度统计点:08, 启动到该点耗时均值:0419 ms, 含义:syncLoginInfoFromKeychain开始时刻 
+速度统计点:09, 启动到该点耗时均值:0419 ms, 含义:添加cookie监控通知开始时刻 
+速度统计点:10, 启动到该点耗时均值:0419 ms, 含义:获取statusBar高度开始时刻 
+速度统计点:11, 启动到该点耗时均值:0419 ms, 含义:startDetectNetwork开始时刻 
+速度统计点:12, 启动到该点耗时均值:0428 ms, 含义:checkLaunchType开始时刻 
+速度统计点:13, 启动到该点耗时均值:0428 ms, 含义:UIWindow初始化开始时刻 
+速度统计点:14, 启动到该点耗时均值:0429 ms, 含义:BBARootViewController sharedInstance开始时刻 
+速度统计点:15, 启动到该点耗时均值:0433 ms, 含义:makeKeyAndVisible开始时刻 
+速度统计点:16, 启动到该点耗时均值:0433 ms, 含义:BBARootViewController loadView开始时刻 
+速度统计点:19, 启动到该点耗时均值:0499 ms, 含义:loadMainView开始时刻 
+速度统计点:20, 启动到该点耗时均值:0499 ms, 含义:初始化BBAMainViewController开始时刻 
+速度统计点:21, 启动到该点耗时均值:0500 ms, 含义:初始化BBAWindowsViewController开始时刻 
+速度统计点:22, 启动到该点耗时均值:0912 ms, 含义:loadMainView结束时刻 
+速度统计点:23, 启动到该点耗时均值:0912 ms, 含义:BBARootViewController loadView结束时刻 
+速度统计点:24, 启动到该点耗时均值:0912 ms, 含义:BBARootViewController viewDidLoad开始时刻 
+速度统计点:25, 启动到该点耗时均值:0912 ms, 含义:BBARootViewController viewDidLoad结束时刻 
+速度统计点:26, 启动到该点耗时均值:0916 ms, 含义:BBAConsole初始化开始时刻 
+速度统计点:27, 启动到该点耗时均值:0916 ms, 含义:开启夜间模式开始时刻 
+速度统计点:28, 启动到该点耗时均值:0916 ms, 含义:doDelayTasks开始时刻 
+速度统计点:29, 启动到该点耗时均值:0916 ms, 含义:application_didFinishLaunchingWithOptions结束时刻 
+速度统计点:32, 启动到该点耗时均值:1183 ms, 含义:applicationDidBecomeActive开始时刻 
+速度统计点:33, 启动到该点耗时均值:1188 ms, 含义:applicationDidBecomeActive结束时刻 
+速度统计点:34, 启动到该点耗时均值:1669 ms, 含义:启动完成 
